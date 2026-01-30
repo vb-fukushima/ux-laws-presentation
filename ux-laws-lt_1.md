@@ -107,7 +107,7 @@ HTMLの`<label for="id">`を使うと、ラベル全体がクリック可能エ�
 
 ---
 
-[📱 デモを見る（index.html）](./form.html)
+[📱 デモを見る（form.html）](./form.html)
 
 ---
 
