@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フィッツの法則 - フォーム例</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .example {
+            background: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .bad {
+            border-left: 4px solid #ff4444;
+        }
+
+        .good {
+            border-left: 4px solid #44ff44;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        .bad h2 {
+            color: #ff4444;
+        }
+
+        .good h2 {
+            color: #22aa22;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="email"] {
+            padding: 8px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            width: 250px;
+        }
+
+        .good label {
+            cursor: pointer;
+            padding: 10px;
+            background-color: #f0f9ff;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .good label:hover {
+            background-color: #e0f2ff;
+        }
+
+        .note {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #fff3cd;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #856404;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>フィッツの法則：フォーム設計の例</h1>
+    <div class="example bad">
+        <h2>❌ 悪い例：input要素のみクリック可能</h2>
+        <label>メールアドレス</label>
+        <input type="email" id="email_bad">
+        <div class="note">
+            📏 クリック可能範囲 = inputの幅のみ（約250px）
+        </div>
+    </div>
+    <div class="example good">
+        <h2>✅ 良い例：ラベル全体がクリック可能</h2>
+        <label for="email_good">
+            メールアドレス
+            <input type="email" id="email_good">
+        </label>
+        <div class="note">
+            📏 クリック可能範囲 = ラベルテキスト + input全体<br>
+            💡 ラベルテキストをクリックしてもinputにフォーカスが当たります！
+        </div>
+    </div>
+</body>
+
+</html>
