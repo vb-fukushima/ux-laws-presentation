@@ -286,46 +286,66 @@ HTMLの`<label for="id">`を使うと、ラベル全体がクリック可能エ�
 ---
 
 <script>
-const num = 80;
-document.addEventListener('DOMContentLoaded', () => {
-  // スライドの総数を取得
-  const slides = document.querySelectorAll('section');
-  const totalSlides = slides.length;
-  
-  slides.forEach((slide, index) => {
-    const currentPage = index + 1;
-    const progress = (currentPage / totalSlides) * 100;
+(function() {
+  const num = 80;
+  const init = () => {
+    const slides = document.querySelectorAll('section');
+    if (slides.length === 0) {
+      // スライドが見つからない場合は少し待って再試行（GitHub Pages等での読み込み遅延対策）
+      setTimeout(init, 100);
+      return;
+    }
     
-    // プログレスバー
-    const bar = document.createElement('div');
-    bar.style.cssText = `
-      position: absolute;
-      bottom: 10px;
-      left: 0;
-      width: 100%;
-      height: 8px;
-      background: linear-gradient(
-        to right,
-        #4CAF50 ${progress}%,
-        #e0e0e0 ${progress}%
-      );
-    `;
+    const totalSlides = slides.length;
     
-    // ドット（画像に変更）
-    const dot = document.createElement('img');
-    dot.src = 'j_man_transparent.png';
-    dot.style.cssText = `
-      position: absolute;
-      bottom: 0px;
-      left: calc(${progress}% - 15px);
-      width: ${num}px;
-      height: ${num}px;
-      object-fit: contain;
-      z-index: 10;
-    `;
-    
-    slide.appendChild(bar);
-    slide.appendChild(dot);
-  });
-});
+    slides.forEach((slide, index) => {
+      // 二重追加を防止
+      if (slide.querySelector('.custom-progress-bar')) return;
+
+      const currentPage = index + 1;
+      const progress = (currentPage / totalSlides) * 100;
+      
+      // プログレスバー
+      const bar = document.createElement('div');
+      bar.className = 'custom-progress-bar';
+      bar.style.cssText = `
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: linear-gradient(
+          to right,
+          #4CAF50 ${progress}%,
+          #e0e0e0 ${progress}%
+        );
+        pointer-events: none;
+      `;
+      
+      // ドット（走る人）
+      const dot = document.createElement('img');
+      dot.src = 'j_man_transparent.png';
+      dot.style.cssText = `
+        position: absolute;
+        bottom: 0px;
+        left: calc(${progress}% - 15px);
+        width: ${num}px;
+        height: ${num}px;
+        object-fit: contain;
+        z-index: 10;
+        pointer-events: none;
+      `;
+      
+      slide.appendChild(bar);
+      slide.appendChild(dot);
+    });
+  };
+
+  // 実行タイミングの調整
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
 </script>
