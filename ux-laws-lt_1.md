@@ -282,3 +282,50 @@ HTMLの`<label for="id">`を使うと、ラベル全体がクリック可能エ�
 ---
 
 # ご清聴ありがとうございました！
+
+---
+
+<script>
+const num = 80;
+document.addEventListener('DOMContentLoaded', () => {
+  // スライドの総数を取得
+  const slides = document.querySelectorAll('section');
+  const totalSlides = slides.length;
+  
+  slides.forEach((slide, index) => {
+    const currentPage = index + 1;
+    const progress = (currentPage / totalSlides) * 100;
+    
+    // プログレスバー
+    const bar = document.createElement('div');
+    bar.style.cssText = `
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(
+        to right,
+        #4CAF50 ${progress}%,
+        #e0e0e0 ${progress}%
+      );
+    `;
+    
+    // ドット（画像に変更）
+    const dot = document.createElement('img');
+    dot.src = 'dora.jpg';
+    dot.style.cssText = `
+      position: absolute;
+      bottom: 0px;
+      left: calc(${progress}% - 15px);
+      width: ${num}px;
+      height: ${num}px;
+      object-fit: contain;
+      z-index: 10;
+    `;
+    
+    slide.appendChild(bar);
+    slide.appendChild(dot);
+  });
+});
+</script>
