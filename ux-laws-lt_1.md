@@ -324,7 +324,7 @@ HTMLの`<label for="id">`を使うと、ラベル全体がクリック可能エ�
       
       // ドット（走る人）
       const dot = document.createElement('img');
-      dot.src = 'j_man_transparent.png';
+      dot.src = 'j_man_transparent.gif';
       dot.style.cssText = `
         position: absolute;
         bottom: 0px;
